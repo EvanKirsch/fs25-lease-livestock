@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="105" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
+  <author>Evan Kirsch</author>
+  <version>1.0.0.0</version>
+  <title>
+    <en>Lease Livestock</en>
+    <de>Vieh Leasen</de>
+  </title>
+  <description>
+    <en><![CDATA[
+GitHub: https://github.com/EvanKirsch/FS25_LeaseLivestock
+]]></en>
+    <de><![CDATA[
+Git-Hub: https://github.com/EvanKirsch/FS25_LeaseLivestock
+]]></de>
+  </description>
+  <iconFilename>icon_leaseLivestock.dds</iconFilename>
+  <multiplayer supported="true"/>
+  <extraSourceFiles>
+    <sourceFile filename="src/LL_leaseLivestock.lua" />
+  </extraSourceFiles>
+</modDesc>
