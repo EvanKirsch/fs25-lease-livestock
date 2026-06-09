@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n>
+    <texts>
+        <text name="ll_leaseButton" text="Lease"/>
+        <text name="ll_leaseConfirm" text="Lease {numAnimals} {animalType} for {rate}/mo?&#10;Full buyout: {buyout}"/>
+        <text name="ll_leaseConfirmSingular" text="Lease 1 {animalType} for {rate}/mo?&#10;Full buyout: {buyout}"/>
+        <text name="ll_leaseSuccess" text="Animals leased successfully!"/>
+        <text name="ll_leasingAnimals" text="Leasing animals..."/>
+    </texts>
+</l10n>
