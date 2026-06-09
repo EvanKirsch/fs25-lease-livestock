@@ -17,10 +17,8 @@ function LL_leaseLivestock:loadMap()
         g_animalScreen.buttonLease = g_animalScreen.buttonBuy:clone(g_animalScreen.buttonsPanel)
         g_animalScreen.buttonLease:setText(g_i18n:getText("ll_leaseButton"))
         g_animalScreen.buttonLease:setVisible(false)
-        function g_animalScreen.buttonLease:onClick()
-            g_animalScreen:onClickLease()
-            return true
-        end
+        g_animalScreen.buttonLease.onClickCallback = AnimalScreen.onClickLease
+        g_animalScreen.buttonLease.onClickCallbackTarget = g_animalScreen
         g_animalScreen.buttonsPanel:invalidateLayout()
     end
 end

@@ -23,8 +23,10 @@ AnimalScreen.setSelectionState = Utils.overwrittenFunction(
 
 -- Lease button click: show confirmation dialog.
 function AnimalScreen:onClickLease()
+    print("AnimalScreen onClickLease")
+
     self.numAnimals = self.numAnimalsElement:getState()
-    local animalIndex   = self.sourceList.selectedIndex
+    local animalIndex = self.sourceList.selectedIndex
     local animalTypeIndex = self.sourceSelectorStateToAnimalType[self.sourceSelector:getState()]
 
     if self.controller.getApplyLeaseConfirmationText == nil then
@@ -32,7 +34,7 @@ function AnimalScreen:onClickLease()
         return true
     end
 
-    local text       = self.controller:getApplyLeaseConfirmationText(animalTypeIndex, animalIndex, self.numAnimals)
+    local text = self.controller:getApplyLeaseConfirmationText(animalTypeIndex, animalIndex, self.numAnimals)
     local buttonText = g_i18n:getText("ll_leaseButton")
     YesNoDialog.show(self.onYesNoLease, self, text, g_i18n:getText("ui_attention"), buttonText, g_i18n:getText("button_back"))
     return true
@@ -49,10 +51,11 @@ end
 -- AnimalScreenDealer extension
 
 function AnimalScreenDealer:applyLease(animalTypeIndex, itemIndex, numItems)
-    local item           = self.sourceItems[animalTypeIndex][itemIndex]
-    local subTypeIndex   = item:getSubTypeIndex()
-    local age            = item:getAge()
-    local buyPrice       = math.abs(item:getPrice()) * numItems
+    print("AnimalScreen applyLease")
+    local item = self.sourceItems[animalTypeIndex][itemIndex]
+    local subTypeIndex = item:getSubTypeIndex()
+    local age = item:getAge()
+    local buyPrice = math.abs(item:getPrice()) * numItems
     local leaseRatePerPeriod = math.ceil(buyPrice / 24)
 
     local errorCode = LL_AnimalLeaseEvent.validate(
@@ -83,12 +86,13 @@ function AnimalScreenDealer:onAnimalLeased(errorCode)
 end
 
 function AnimalScreenDealer:getApplyLeaseConfirmationText(animalTypeIndex, itemIndex, numItems)
-    local item       = self.sourceItems[animalTypeIndex][itemIndex]
-    local buyPrice   = math.abs(item:getPrice()) * numItems
-    local leaseRate  = math.ceil(buyPrice / 24)
-    local textKey    = numItems == 1 and "ll_leaseConfirmSingular" or "ll_leaseConfirm"
-    local rateStr    = g_i18n:formatMoney(leaseRate, 0, true, true)
-    local buyoutStr  = g_i18n:formatMoney(buyPrice, 0, true, true)
+    print("AnimalScreenDealer getApplyLeaseConfirmationText")
+    local item = self.sourceItems[animalTypeIndex][itemIndex]
+    local buyPrice = math.abs(item:getPrice()) * numItems
+    local leaseRate = math.ceil(buyPrice / 24)
+    local textKey = numItems == 1 and "ll_leaseConfirmSingular" or "ll_leaseConfirm"
+    local rateStr = g_i18n:formatMoney(leaseRate, 0, true, true)
+    local buyoutStr = g_i18n:formatMoney(buyPrice, 0, true, true)
     local animalType = item:getTitle() .. ", " .. item:getName()
     return string.namedFormat(g_i18n:getText(textKey),
         "numAnimals", numItems,
