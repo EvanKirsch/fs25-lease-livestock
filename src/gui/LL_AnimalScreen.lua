@@ -2,9 +2,6 @@
 -- Hooks into AnimalScreen to add a Lease button alongside the Buy button.
 -- Also extends AnimalScreenDealer with lease-specific logic.
 --
--- NOTE: g_animalScreen is created in main.lua before any mod extraSourceFiles are
--- loaded, so onGuiSetupFinished has already fired by the time this file executes.
--- The Lease button is therefore cloned in LL_leaseLivestock:loadMap() instead.
 
 -- AnimalScreen hooks
 
@@ -14,7 +11,7 @@ AnimalScreen.setSelectionState = Utils.overwrittenFunction(
     function(self, superFunc, state, ...)
         local result = superFunc(self, state, ...)
         if self.buttonLease ~= nil then
-            self.buttonLease:setVisible(state == AnimalScreen.SELECTION_AMOUNT and self.isBuyMode)
+            self.buttonLease:setVisible(self.selectionState == AnimalScreen.SELECTION_AMOUNT and self.isBuyMode)
             self.buttonsPanel:invalidateLayout()
         end
         return result
