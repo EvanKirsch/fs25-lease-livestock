@@ -2,8 +2,8 @@
 <l10n>
     <texts>
         <text name="ll_leaseButton" text="Leasen"/>
-        <text name="ll_leaseConfirm" text="{numAnimals} {animalType} für {rate}/Monat leasen?&#10;Vollständige Ablösung: {buyout}"/>
-        <text name="ll_leaseConfirmSingular" text="1 {animalType} für {rate}/Monat leasen?&#10;Vollständige Ablösung: {buyout}"/>
+        <text name="ll_leaseConfirm" text="%{numAnimals}d %{animalType}s für %{rate}s/Monat leasen?&#10;Vollständige Ablösung: %{buyout}s"/>
+        <text name="ll_leaseConfirmSingular" text="1 %{animalType}s für %{rate}s /Monat leasen?&#10;Vollständige Ablösung: %{buyout}s"/>
         <text name="ll_leaseSuccess" text="Tiere erfolgreich geleast!"/>
         <text name="ll_leasingAnimals" text="Tiere werden geleast..."/>
     </texts>
