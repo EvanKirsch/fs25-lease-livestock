@@ -2,8 +2,7 @@
 <l10n>
     <texts>
         <text name="ll_leaseButton" text="Lease"/>
-        <text name="ll_leaseConfirm" text="Lease %{numAnimals}d %{animalType}s for %{rate}s/mo?&#10;Full buyout: %{buyout}s"/>
-        <text name="ll_leaseConfirmSingular" text="Lease 1 %{animalType}s for %{rate}s /mo?&#10;Full buyout: %{buyout}s"/>
+        <text name="ll_leaseConfirm" text="Do you want to lease %{numAnimals}d (%{animalType}s) for %{rate}s /mo?&#10;Full buyout: %{buyout}s"/>
         <text name="ll_leaseSuccess" text="Animals leased successfully!"/>
         <text name="ll_leasingAnimals" text="Leasing animals..."/>
     </texts>
