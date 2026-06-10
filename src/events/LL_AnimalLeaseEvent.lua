@@ -14,7 +14,7 @@ LL_AnimalLeaseEvent.LEASE_ERROR_OBJECT_DOES_NOT_EXIST = 6
 LL_AnimalLeaseEvent.LEASE_ERROR_NO_BARN_AVAILABLE = 7
 
 local LL_AnimalLeaseEvent_mt = Class(LL_AnimalLeaseEvent, Event)
-InitStaticEventClass(LL_AnimalLeaseEvent, "LL_AnimalLeaseEvent")
+InitEventClass(LL_AnimalLeaseEvent, "LL_AnimalLeaseEvent")
 
 function LL_AnimalLeaseEvent.emptyNew()
     return Event.new(LL_AnimalLeaseEvent_mt)

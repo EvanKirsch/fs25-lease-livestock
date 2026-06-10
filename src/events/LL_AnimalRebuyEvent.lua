@@ -11,7 +11,7 @@ LL_AnimalRebuyEvent.REBUY_ERROR_NOT_LEASED = 3
 LL_AnimalRebuyEvent.REBUY_ERROR_WRONG_FARM = 4
 
 local LL_AnimalRebuyEvent_mt = Class(LL_AnimalRebuyEvent, Event)
-InitStaticEventClass(LL_AnimalRebuyEvent, "LL_AnimalRebuyEvent")
+InitEventClass(LL_AnimalRebuyEvent, "LL_AnimalRebuyEvent")
 
 function LL_AnimalRebuyEvent.emptyNew()
     return Event.new(LL_AnimalRebuyEvent_mt)
