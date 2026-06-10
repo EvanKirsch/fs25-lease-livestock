@@ -16,6 +16,7 @@ function LL_leaseLivestock:loadMap()
     if g_animalScreen ~= nil and g_animalScreen.buttonBuy ~= nil then
         g_animalScreen.buttonLease = g_animalScreen.buttonBuy:clone(g_animalScreen.buttonsPanel)
         g_animalScreen.buttonLease:setText(g_i18n:getText("ll_leaseButton"))
+        g_animalScreen.buttonLease:setInputAction("LL_LEASE")
         g_animalScreen.buttonLease:setVisible(false)
         g_animalScreen.buttonLease.onClickCallback = AnimalScreen.onClickLease
         g_animalScreen.buttonLease.onClickCallbackTarget = g_animalScreen

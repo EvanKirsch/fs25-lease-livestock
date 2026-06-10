@@ -16,11 +16,20 @@ Git-Hub: https://github.com/EvanKirsch/FS25_LeaseLivestock
   </description>
   <iconFilename>icon_leaseLivestock.dds</iconFilename>
   <multiplayer supported="true"/>
+  <actions>
+    <action name="LL_LEASE" axisType="HALF" category="MENU" />
+  </actions>
+  <inputBinding>
+    <actionBinding action="LL_LEASE">
+      <binding device="KB_MOUSE_DEFAULT" input="KEY_lshift" axisComponent="+" neutralInput="0" index="1" />
+    </actionBinding>
+  </inputBinding>
   <l10n filenamePrefix="translations/translation" />
   <extraSourceFiles>
     <sourceFile filename="src/events/LL_AnimalLeaseEvent.lua" />
     <sourceFile filename="src/events/LL_AnimalRebuyEvent.lua" />
     <sourceFile filename="src/LL_leaseLivestock.lua" />
     <sourceFile filename="src/gui/LL_AnimalScreen.lua" />
+    <sourceFile filename="src/gui/LL_AnimalScreenDealer.lua" />
   </extraSourceFiles>
 </modDesc>
