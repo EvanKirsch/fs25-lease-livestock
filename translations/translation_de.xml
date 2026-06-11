@@ -9,5 +9,6 @@
         <text name="ll_leaseNotAvailable" text="Leasen ist hier nicht verfügbar."/>
         <text name="ll_leaseUnknownError" text="Unbekannter Lease-Fehler."/>
         <text name="ll_leased" text="(Geleast)"/>
+        <text name="ll_finance_livestockLeasingCost" text="Tier-Leasing"/>
     </texts>
 </l10n>
