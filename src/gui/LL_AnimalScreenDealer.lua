@@ -23,7 +23,7 @@ function LL_AnimalScreenDealer:onAnimalLeased(errorCode)
     if mapping ~= nil then
         self.sourceActionFinished(mapping.isWarning, g_i18n:getText(mapping.text))
     else
-        self.sourceActionFinished(true, "Unknown lease error (" .. tostring(errorCode) .. ")")
+        self.sourceActionFinished(true, g_i18n:getText("ll_leaseUnknownError"))
     end
 end
 

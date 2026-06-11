@@ -6,5 +6,7 @@
         <text name="input_LL_LEASE" text="Tiere leasen"/>
         <text name="ll_leaseSuccess" text="Tiere erfolgreich geleast!"/>
         <text name="ll_leasingAnimals" text="Tiere werden geleast..."/>
+        <text name="ll_leaseNotAvailable" text="Leasen ist hier nicht verfügbar."/>
+        <text name="ll_leaseUnknownError" text="Unbekannter Lease-Fehler."/>
     </texts>
 </l10n>

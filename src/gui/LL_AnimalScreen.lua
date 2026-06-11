@@ -27,7 +27,7 @@ function AnimalScreen:onClickLease()
     local animalTypeIndex = self.sourceSelectorStateToAnimalType[self.sourceSelector:getState()]
 
     if self.controller.getApplyLeaseConfirmationText == nil then
-        InfoDialog.show("Leasing is not available here.")
+        InfoDialog.show(g_i18n:getText("ll_leaseNotAvailable"))
         return true
     end
 
