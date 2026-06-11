@@ -96,7 +96,7 @@ function LL_AnimalLeaseEvent.validate(object, subTypeIndex, _, numAnimals, lease
     if not object:getSupportsAnimalSubType(subTypeIndex) then
         return LL_AnimalLeaseEvent.LEASE_ERROR_ANIMAL_NOT_SUPPORTED
     end
-    if object:getNumOfFreeAnimalSlots() < numAnimals then
+    if object:getNumOfFreeAnimalSlots(subTypeIndex) < numAnimals then
         return LL_AnimalLeaseEvent.LEASE_ERROR_NOT_ENOUGH_SPACE
     end
     local animalTypeIndex = g_currentMission.animalSystem:getTypeIndexBySubTypeIndex(subTypeIndex)
