@@ -25,7 +25,7 @@ function LL_LeaseLivestock:onPeriodChanged()
         for _, cluster in ipairs(husbandry:getClusters()) do
             if cluster.isLeased then
                 local rate = LL_LeaseLivestock:getAnimalLeaseRate(cluster.subTypeIndex) * cluster.numAnimals
-                g_currentMission:addMoney(-rate, farmId, MoneyType.OTHER, true, true)
+                g_currentMission:addMoney(-rate, farmId, MoneyType.LIVESTOCK_LEASING_COST, true, true)
             end
         end
     end
@@ -61,3 +61,5 @@ function LL_LeaseLivestock:addLease(object, subTypeIndex, age, numAnimals, farmI
 end
 
 addModEventListener(LL_LeaseLivestock)
+
+MoneyType.LIVESTOCK_LEASING_COST = MoneyType.register("livestockLeasingCost", "ll_finance_livestockLeasingCosts")
