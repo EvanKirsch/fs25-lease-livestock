@@ -29,7 +29,7 @@ Git-Hub: https://github.com/EvanKirsch/FS25_LeaseLivestock
     <sourceFile filename="src/events/LL_AnimalLeaseEvent.lua" />
     <sourceFile filename="src/events/LL_AnimalRebuyEvent.lua" />
     <sourceFile filename="src/cluster/LL_AnimalClusterLeased.lua" />
-    <sourceFile filename="src/LL_leaseLivestock.lua" />
+    <sourceFile filename="src/LL_LeaseLivestock.lua" />
     <sourceFile filename="src/gui/LL_AnimalScreen.lua" />
     <sourceFile filename="src/gui/LL_AnimalScreenDealer.lua" />
     <sourceFile filename="src/gui/LL_InGameMenuAnimalsFrame.lua" />

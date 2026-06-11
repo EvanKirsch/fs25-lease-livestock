@@ -28,10 +28,8 @@ end
 
 function LL_AnimalScreenDealer:getApplyLeaseConfirmationText(animalTypeIndex, itemIndex, numItems)
     local item = self.sourceItems[animalTypeIndex][itemIndex]
-    local buyPrice = math.abs(item:getPrice()) * numItems
-    local leaseRate = math.ceil(buyPrice / 24)
+    local leaseRate = LL_LeaseLivestock:getAnimalLeaseRate(animalTypeIndex)
     local rateStr = g_i18n:formatMoney(leaseRate, 0, true, true)
-    local buyoutStr = g_i18n:formatMoney(buyPrice, 0, true, true)
     local animalType = item:getTitle() .. ", " .. item:getName()
     return string.namedFormat(g_i18n:getText("ll_leaseConfirm"),
         "numAnimals", numItems,

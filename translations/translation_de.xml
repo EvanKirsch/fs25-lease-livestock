@@ -2,7 +2,7 @@
 <l10n>
     <texts>
         <text name="ll_leaseButton" text="Leasen"/>
-        <text name="ll_leaseConfirm" text="Möchten Sie %{numAnimals}d (%{animalType}s) für %{rate}s /Monat leasen?&#10;Vollständige Ablösung: %{buyout}s"/>
+        <text name="ll_leaseConfirm" text="Möchten Sie %{numAnimals}d (%{animalType}s) für %{rate}s /Monat gesamt leasen?"/>
         <text name="input_LL_LEASE" text="Tiere leasen"/>
         <text name="ll_leaseSuccess" text="Tiere erfolgreich geleast!"/>
         <text name="ll_leasingAnimals" text="Tiere werden geleast..."/>

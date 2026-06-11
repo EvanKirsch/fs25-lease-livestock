@@ -1,11 +1,11 @@
--- LL_leaseLivestock
+-- LL_LeaseLivestock
 -- Main driver for LL
 --
 
-LL_leaseLivestock = {}
-LL_leaseLivestock.dir = g_currentModDirectory
+LL_LeaseLivestock = {}
+LL_LeaseLivestock.dir = g_currentModDirectory
 
-function LL_leaseLivestock:loadMap()
+function LL_LeaseLivestock:loadMap()
     g_messageCenter:subscribe(MessageType.PERIOD_CHANGED, self.onPeriodChanged, self)
     if g_animalScreen ~= nil and g_animalScreen.buttonBuy ~= nil then
         g_animalScreen.buttonLease = g_animalScreen.buttonBuy:clone(g_animalScreen.buttonsPanel)
@@ -18,12 +18,27 @@ function LL_leaseLivestock:loadMap()
     end
 end
 
-function LL_leaseLivestock:onPeriodChanged()
-    -- TODO: implement
+function LL_LeaseLivestock:onPeriodChanged()
+    if not g_currentMission:getIsServer() then return end
+    for _, husbandry in ipairs(g_currentMission.husbandrySystem.placeables) do
+        local farmId = husbandry:getOwnerFarmId()
+        for _, cluster in ipairs(husbandry:getClusters()) do
+            if cluster.isLeased then
+                local rate = LL_LeaseLivestock:getAnimalLeaseRate(cluster.subTypeIndex) * cluster.numAnimals
+                g_currentMission:addMoney(-rate, farmId, MoneyType.OTHER, true, true)
+            end
+        end
+    end
+end
+
+function LL_LeaseLivestock:getAnimalLeaseRate(subTypeIndex)
+    local buyPrice = g_currentMission.animalSystem:getAnimalBuyPrice(subTypeIndex, 18)
+    local leaseRatePerPeriod = math.floor(buyPrice / 24)
+    return leaseRatePerPeriod
 end
 
 -- Adds animals to the husbandry, charges the first period, and records the lease.
-function LL_leaseLivestock:addLease(object, subTypeIndex, age, numAnimals, farmId, leaseRatePerPeriod, buyoutPrice)
+function LL_LeaseLivestock:addLease(object, subTypeIndex, age, numAnimals, farmId, leaseRatePerPeriod, buyoutPrice)
     local animalSystem = g_currentMission.animalSystem
     local cluster = animalSystem:createClusterFromSubTypeIndex(subTypeIndex)
     cluster.isLeased = true
@@ -45,4 +60,4 @@ function LL_leaseLivestock:addLease(object, subTypeIndex, age, numAnimals, farmI
     g_currentMission:addMoney(-leaseRatePerPeriod, farmId, MoneyType.OTHER, true, true)
 end
 
-addModEventListener(LL_leaseLivestock)
+addModEventListener(LL_LeaseLivestock)

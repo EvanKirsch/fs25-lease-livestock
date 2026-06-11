@@ -12,6 +12,16 @@ AnimalCluster.getHash = Utils.overwrittenFunction(AnimalCluster.getHash,
     end
 )
 
+-- Set sell price of leased animals
+AnimalCluster.getSellPrice = Utils.overwrittenFunction(AnimalCluster.getSellPrice,
+    function(self, superFunc)
+        if self.isLeased then
+            return LL_LeaseLivestock:getAnimalLeaseRate(self.subTypeIndex)
+        end
+        return superFunc(self)
+    end
+)
+
 -- Prevent merges between leased and non-leased clusters.
 AnimalCluster.merge = Utils.overwrittenFunction(AnimalCluster.merge,
     function(self, superFunc, otherCluster)
@@ -56,6 +66,7 @@ AnimalCluster.saveToXMLFile = Utils.overwrittenFunction(AnimalCluster.saveToXMLF
     end
 )
 
+-- Load isLeased from savegame XML.
 AnimalCluster.loadFromXMLFile = Utils.overwrittenFunction(AnimalCluster.loadFromXMLFile,
     function(self, superFunc, xmlFile, key)
         local result = superFunc(self, xmlFile, key)

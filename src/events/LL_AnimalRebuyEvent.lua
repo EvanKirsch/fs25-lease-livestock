@@ -67,12 +67,12 @@ function LL_AnimalRebuyEvent:run(connection)
         return
     end
 
-    LL_leaseLivestock:rebuyLease(self.leaseId, farmId)
+    LL_LeaseLivestock:rebuyLease(self.leaseId, farmId)
     connection:sendEvent(LL_AnimalRebuyEvent.newServerToClient(LL_AnimalRebuyEvent.REBUY_SUCCESS))
 end
 
 function LL_AnimalRebuyEvent.validate(leaseId, farmId)
-    local lease = LL_leaseLivestock.leases[leaseId]
+    local lease = LL_LeaseLivestock.leases[leaseId]
     if lease == nil then
         return LL_AnimalRebuyEvent.REBUY_ERROR_NOT_LEASED
     end

@@ -72,16 +72,15 @@ function LL_AnimalLeaseEvent:run(connection)
     local uniqueUserId = g_currentMission.userManager:getUniqueUserIdByConnection(connection)
     local farm = g_farmManager:getFarmForUniqueUserId(uniqueUserId)
     local farmId = farm.farmId
-    local buyPrice = g_currentMission.animalSystem:getAnimalBuyPrice(self.subTypeIndex, self.age) * self.numAnimals
-    local leaseRatePerPeriod = math.ceil(buyPrice / 24)
+    local leaseRatePerPeriod = LL_LeaseLivestock(self.subTypeIndex) * self.numAnimals
 
-    local errorCode = LL_AnimalLeaseEvent.validate(self.object, self.subTypeIndex, self.age, self.numAnimals, leaseRatePerPeriod, farmId)
+    local errorCode = LL_AnimalLeaseEvent.validate(self.object, self.subTypeIndex, 18, self.numAnimals, leaseRatePerPeriod, farmId)
     if errorCode ~= nil then
         connection:sendEvent(LL_AnimalLeaseEvent.newServerToClient(errorCode))
         return
     end
 
-    LL_leaseLivestock:addLease(self.object, self.subTypeIndex, self.age, self.numAnimals, farmId, leaseRatePerPeriod, buyPrice)
+    LL_LeaseLivestock:addLease(self.object, self.subTypeIndex, self.age, self.numAnimals, farmId, leaseRatePerPeriod, buyPrice)
     connection:sendEvent(LL_AnimalLeaseEvent.newServerToClient(LL_AnimalLeaseEvent.LEASE_SUCCESS))
 end
 
