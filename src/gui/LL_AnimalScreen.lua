@@ -18,6 +18,22 @@ AnimalScreen.setSelectionState = Utils.overwrittenFunction(
     end
 )
 
+
+-- Add the lease status to the animal's name in the info box
+AnimalScreen.updateInfoBox = Utils.overwrittenFunction(
+    AnimalScreen.updateInfoBox,
+    function(self, superFunc, ...)
+        local result = superFunc(self, ...)
+        if not self.isBuyMode and not g_gui.currentlyReloading then
+            local item = self.controller:getTargetItems()[self.sourceList.selectedIndex]
+            if item ~= nil and item.cluster ~= nil and item.cluster.isLeased then
+                self.infoName:setText(self.infoName:getText() .. " " .. g_i18n:getText("ll_leased"))
+            end
+        end
+        return result
+    end
+)
+
 -- Lease button click: show confirmation dialog.
 function AnimalScreen:onClickLease()
     self.numAnimals = self.numAnimalsElement:getState()

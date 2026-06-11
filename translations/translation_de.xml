@@ -8,5 +8,6 @@
         <text name="ll_leasingAnimals" text="Tiere werden geleast..."/>
         <text name="ll_leaseNotAvailable" text="Leasen ist hier nicht verfügbar."/>
         <text name="ll_leaseUnknownError" text="Unbekannter Lease-Fehler."/>
+        <text name="ll_leased" text="(Geleast)"/>
     </texts>
 </l10n>
