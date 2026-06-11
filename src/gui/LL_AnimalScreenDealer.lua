@@ -5,7 +5,6 @@
 LL_AnimalScreenDealer = {}
 
 function LL_AnimalScreenDealer:applyLease(animalTypeIndex, itemIndex, numItems)
-    print("AnimalScreen applyLease")
     local item = self.sourceItems[animalTypeIndex][itemIndex]
     local subTypeIndex = item:getSubTypeIndex()
     local age = item:getAge()
@@ -28,7 +27,6 @@ function LL_AnimalScreenDealer:onAnimalLeased(errorCode)
 end
 
 function LL_AnimalScreenDealer:getApplyLeaseConfirmationText(animalTypeIndex, itemIndex, numItems)
-    print("AnimalScreenDealer getApplyLeaseConfirmationText")
     local item = self.sourceItems[animalTypeIndex][itemIndex]
     local buyPrice = math.abs(item:getPrice()) * numItems
     local leaseRate = math.ceil(buyPrice / 24)

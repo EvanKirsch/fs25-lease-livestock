@@ -20,8 +20,6 @@ AnimalScreen.setSelectionState = Utils.overwrittenFunction(
 
 -- Lease button click: show confirmation dialog.
 function AnimalScreen:onClickLease()
-    print("AnimalScreen onClickLease")
-
     self.numAnimals = self.numAnimalsElement:getState()
     local animalIndex = self.sourceList.selectedIndex
     local animalTypeIndex = self.sourceSelectorStateToAnimalType[self.sourceSelector:getState()]

@@ -81,10 +81,6 @@ function LL_AnimalLeaseEvent:run(connection)
         return
     end
 
-    print("Running Lease Event")
-    print("leaseRatePerPeriod=" .. leaseRatePerPeriod)
-    print("buyPrice=" .. buyPrice)
-
     LL_leaseLivestock:addLease(self.object, self.subTypeIndex, self.age, self.numAnimals, farmId, leaseRatePerPeriod, buyPrice)
     connection:sendEvent(LL_AnimalLeaseEvent.newServerToClient(LL_AnimalLeaseEvent.LEASE_SUCCESS))
 end
