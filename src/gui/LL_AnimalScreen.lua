@@ -1,9 +1,6 @@
 -- LL_AnimalScreen
--- Hooks into AnimalScreen to add a Lease button alongside the Buy button.
--- Also extends AnimalScreenDealer with lease-specific logic.
+-- AnimalScreen hooks, lease buttons and lease error codes
 --
-
--- AnimalScreen hooks
 
 -- Mirror the Buy button's visibility on the Lease button.
 AnimalScreen.setSelectionState = Utils.overwrittenFunction(
@@ -18,7 +15,6 @@ AnimalScreen.setSelectionState = Utils.overwrittenFunction(
     end
 )
 
-
 -- Add the lease status to the animal's name in the info box
 AnimalScreen.updateInfoBox = Utils.overwrittenFunction(
     AnimalScreen.updateInfoBox,
@@ -31,6 +27,21 @@ AnimalScreen.updateInfoBox = Utils.overwrittenFunction(
             end
         end
         return result
+    end
+)
+
+-- Append the leased label to the name on each animal card in the sell list.
+AnimalScreen.populateCellForItemInSection = Utils.overwrittenFunction(
+    AnimalScreen.populateCellForItemInSection,
+    function(self, superFunc, list, section, index, cell)
+        superFunc(self, list, section, index, cell)
+        if list == self.sourceList and not self.isBuyMode then
+            local item = self.controller:getTargetItems()[index]
+            if item ~= nil and item.cluster ~= nil and item.cluster.isLeased then
+                local nameElement = cell:getAttribute("name")
+                nameElement:setText(nameElement:getText() .. " " .. g_i18n:getText("ll_leased"))
+            end
+        end
     end
 )
 

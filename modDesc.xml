@@ -32,5 +32,6 @@ Git-Hub: https://github.com/EvanKirsch/FS25_LeaseLivestock
     <sourceFile filename="src/LL_leaseLivestock.lua" />
     <sourceFile filename="src/gui/LL_AnimalScreen.lua" />
     <sourceFile filename="src/gui/LL_AnimalScreenDealer.lua" />
+    <sourceFile filename="src/gui/LL_InGameMenuAnimalsFrame.lua" />
   </extraSourceFiles>
 </modDesc>
