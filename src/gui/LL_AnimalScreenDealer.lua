@@ -28,7 +28,7 @@ end
 
 function LL_AnimalScreenDealer:getApplyLeaseConfirmationText(animalTypeIndex, itemIndex, numItems)
     local item = self.sourceItems[animalTypeIndex][itemIndex]
-    local leaseRate = LL_LeaseLivestock:getAnimalLeaseRate(animalTypeIndex)
+    local leaseRate = LL_LeaseLivestock:getAnimalLeaseRate(item:getSubTypeIndex())
     local totalRate = leaseRate * numItems
     local rateStr = g_i18n:formatMoney(leaseRate, 0, true, true)
     local totalRateStr = g_i18n:formatMoney(totalRate, 0, true, true)
