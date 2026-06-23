@@ -27,7 +27,6 @@ Git-Hub: https://github.com/EvanKirsch/FS25_LeaseLivestock
   <l10n filenamePrefix="translations/translation" />
   <extraSourceFiles>
     <sourceFile filename="src/events/LL_AnimalLeaseEvent.lua" />
-    <sourceFile filename="src/events/LL_AnimalRebuyEvent.lua" />
     <sourceFile filename="src/cluster/LL_AnimalClusterLeased.lua" />
     <sourceFile filename="src/LL_LeaseLivestock.lua" />
     <sourceFile filename="src/LL_FinanceStatsExt.lua" />
