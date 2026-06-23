@@ -17,16 +17,19 @@ There is no automated test suite. Testing is done by launching Farming Simulator
 
 ## Architecture
 
-This is a Farming Simulator 25 Lua mod. FS25 loads `modDesc.xml` first, which declares the four source files in load order:
+This is a Farming Simulator 25 Lua mod. FS25 loads `modDesc.xml` first, which declares the source files in load order:
 
 1. `src/events/LL_AnimalLeaseEvent.lua` — network event for leasing animals
-2. `src/events/LL_AnimalRebuyEvent.lua` — network event for buying out a lease
-3. `src/LL_leaseLivestock.lua` — main mod object; holds lease state, wires up periodic charges, and creates the Lease button at `loadMap()` time
-4. `src/gui/LL_AnimalScreen.lua` — monkey-patches `AnimalScreen` and extends `AnimalScreenDealer` with lease UI logic
+2. `src/cluster/LL_AnimalClusterLeased.lua` — patches `AnimalCluster` to add `isLeased` state, savegame persistence, and network sync
+3. `src/LL_LeaseLivestock.lua` — main mod object; wires up periodic charges and creates the Lease button at `loadMap()` time
+4. `src/LL_FinanceStatsExt.lua` — registers the `livestockLeasingCost` money type and finance stat
+5. `src/gui/LL_AnimalScreen.lua` — patches `AnimalScreen` to show the Lease button and leased labels
+6. `src/gui/LL_AnimalScreenDealer.lua` — adds lease logic to `AnimalScreenDealer` and `AnimalScreenDealerFarm`
+7. `src/gui/LL_InGameMenuAnimalsFrame.lua` — patches `InGameMenuAnimalsFrame` to show leased labels in the animals overview
 
 ### Data model
 
-`LL_leaseLivestock.leases` is a table keyed by integer `leaseId`. Each entry holds `{ farmId, subTypeIndex, numAnimals, leaseRatePerPeriod, buyoutPrice, totalPaid }`. The lease rate is `ceil(buyPrice / 24)` (i.e., full purchase price spread over 24 in-game periods). Buyout pays off the remaining balance (`buyoutPrice - totalPaid`). Persistence to savegame XML is not yet implemented (marked `TODO`).
+Lease state lives directly on `AnimalCluster` via the `isLeased` boolean field, patched in `LL_AnimalClusterLeased.lua`. There is no separate lease registry. The lease rate is `ceil(buyPrice / 24)` where `buyPrice` is the buy price for a single animal at age 18 (`getAnimalBuyPrice(subTypeIndex, 18)`). Periodic charges multiply the per-animal rate by `cluster.numAnimals`. Savegame persistence is handled via the `AnimalCluster` XML save/load patches.
 
 ### Network flow
 
@@ -38,12 +41,12 @@ FS25 uses a client-authoritative request / server-validates pattern via `Event` 
 
 ### GUI integration constraint
 
-`g_animalScreen` is constructed in FS25's `main.lua` before any mod `extraSourceFiles` are loaded, so `onGuiSetupFinished` has already fired. The Lease button is therefore cloned from `buttonBuy` in `LL_leaseLivestock:loadMap()` (called by the engine after map load), not in the GUI file. `LL_AnimalScreen.lua` only adds behavior (overwritten functions and callbacks) — it never constructs widgets.
+`g_animalScreen` is constructed in FS25's `main.lua` before any mod `extraSourceFiles` are loaded, so `onGuiSetupFinished` has already fired. The Lease button is therefore cloned from `buttonBuy` in `LL_LeaseLivestock:loadMap()` (called by the engine after map load), not in the GUI file. `LL_AnimalScreen.lua` only adds behavior (overwritten functions and callbacks) — it never constructs widgets.
 
 ### Lua environment
 
-`~/Repos/mods/dataS` is the GIANTS engine Lua stub library. It is referenced in `.luarc.json` as a workspace library so the language server resolves FS25 globals (`g_currentMission`, `AnimalScreen`, `Event`, `Class`, etc.). The actual game runtime provides these globals; the stubs are for IDE support only.
+The GIANTS engine Lua stub library is referenced in `.luarc.json` as a workspace library so the language server resolves FS25 globals (`g_currentMission`, `AnimalScreen`, `Event`, `Class`, etc.). The actual game runtime provides these globals; the stubs are for IDE support only.
 
 ## Translations
 
-String keys are defined in `translations/translation_en.xml` (and `translation_de.xml`). All user-facing strings go through `g_i18n:getText("ll_<key>")`. Confirmation dialog text uses `string.namedFormat` with named placeholders (`{numAnimals}`, `{animalType}`, `{rate}`, `{buyout}`).
+String keys are defined in `translations/translation_en.xml` (and `translation_de.xml`). All user-facing strings go through `g_i18n:getText("ll_<key>")`. Confirmation dialog text uses `string.namedFormat` with named placeholders (`{numAnimals}`, `{animalType}`, `{rate}`, `{totalRate}`).
