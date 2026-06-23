@@ -33,7 +33,7 @@ end
 
 function LL_LeaseLivestock:getAnimalLeaseRate(subTypeIndex)
     local buyPrice = g_currentMission.animalSystem:getAnimalBuyPrice(subTypeIndex, 18)
-    local leaseRatePerPeriod = math.floor(buyPrice / 24)
+    local leaseRatePerPeriod = math.ceil(buyPrice / 24)
     return leaseRatePerPeriod
 end
 
