@@ -80,7 +80,7 @@ function LL_AnimalLeaseEvent:run(connection)
         return
     end
 
-    LL_LeaseLivestock:addLease(self.object, self.subTypeIndex, self.age, self.numAnimals, farmId, leaseRatePerPeriod, buyPrice)
+    LL_LeaseLivestock:addLease(self.object, self.subTypeIndex, self.age, self.numAnimals, farmId, leaseRatePerPeriod)
     connection:sendEvent(LL_AnimalLeaseEvent.newServerToClient(LL_AnimalLeaseEvent.LEASE_SUCCESS))
 end
 

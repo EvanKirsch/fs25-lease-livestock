@@ -38,7 +38,7 @@ function LL_LeaseLivestock:getAnimalLeaseRate(subTypeIndex)
 end
 
 -- Adds animals to the husbandry, charges the first period, and records the lease.
-function LL_LeaseLivestock:addLease(object, subTypeIndex, age, numAnimals, farmId, leaseRatePerPeriod, buyoutPrice)
+function LL_LeaseLivestock:addLease(object, subTypeIndex, age, numAnimals, farmId, leaseRatePerPeriod)
     local animalSystem = g_currentMission.animalSystem
     local cluster = animalSystem:createClusterFromSubTypeIndex(subTypeIndex)
     cluster.isLeased = true
