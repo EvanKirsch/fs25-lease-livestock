@@ -40,16 +40,16 @@ end
 -- Adds animals to the husbandry, charges the first period, and records the lease.
 function LL_LeaseLivestock:addLease(object, subTypeIndex, age, numAnimals, farmId, leaseRatePerPeriod)
     local animalSystem = g_currentMission.animalSystem
-    local cluster = animalSystem:createClusterFromSubTypeIndex(subTypeIndex)
-    cluster.isLeased = true
-    if cluster:getSupportsMerging() then
-        cluster.numAnimals = numAnimals
-        cluster.age = age
-        cluster.subTypeIndex = subTypeIndex
-        object:addCluster(cluster)
+    local mergeableCluster = animalSystem:createClusterFromSubTypeIndex(subTypeIndex)
+    if mergeableCluster:getSupportsMerging() then
+        mergeableCluster.isLeased = true
+        mergeableCluster.numAnimals = numAnimals
+        mergeableCluster.age = age
+        mergeableCluster.subTypeIndex = subTypeIndex
+        object:addCluster(mergeableCluster)
     else
         for _ = 1, numAnimals do
-            cluster = animalSystem:createClusterFromSubTypeIndex(subTypeIndex)
+            local cluster = animalSystem:createClusterFromSubTypeIndex(subTypeIndex)
             cluster.isLeased = true
             cluster.numAnimals = 1
             cluster.age = age
