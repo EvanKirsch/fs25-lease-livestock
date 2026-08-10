@@ -8,6 +8,7 @@
         <text name="ll_terminatedLeaseRefund" text="Lease Refunds"/>
         <text name="ll_leasePrices" text="Lease Period Prices"/>
         <text name="ll_leaseConfirm" text="Do you want to lease %{numAnimals}d (%{animalType}s) for %{rate}s /mo each? (%{totalRate}s total)"/>
+        <text name="ll_terminateLeaseConfirm" text="Do you want to terminate the lease on %{numAnimals}d (%{animalType}s)? You will be refunded the current lease period fee of %{rate}s each (%{totalRate}s total)."/>
         <text name="input_LL_BUY_LEASE_MODE" text="Change Buy/Lease Livestock Mode"/>
         <text name="ll_leaseSuccess" text="Animals leased successfully!"/>
         <text name="ll_leasingAnimals" text="Leasing animals..."/>

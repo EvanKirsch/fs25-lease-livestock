@@ -80,13 +80,20 @@ AnimalScreen.setSelectionState = Utils.overwrittenFunction(
     end
 )
 
--- Show lease pricing in the Price/Fee/Total rows while lease mode is toggled on.
+-- Show lease pricing in the Price/Fee/Total rows while lease mode is toggled on, and drop the
+-- transport fee when terminating a lease (return is fee-free, unlike a normal sell).
 AnimalScreen.getPrice = Utils.overwrittenFunction(
     AnimalScreen.getPrice,
     function(self, superFunc, numAnimals)
         if self.isBuyMode and self.isLeaseMode then
             local item = getLeaseSourceItem(self)
             if item ~= nil then
+                local leaseRate = LL_LeaseLivestock:getAnimalLeaseRate(item:getSubTypeIndex()) * numAnimals
+                return true, leaseRate, 0, leaseRate
+            end
+        elseif not self.isBuyMode then
+            local item = self.controller:getTargetItems()[self.sourceList.selectedIndex]
+            if item ~= nil and item.cluster ~= nil and item.cluster.isLeased then
                 local leaseRate = LL_LeaseLivestock:getAnimalLeaseRate(item:getSubTypeIndex()) * numAnimals
                 return true, leaseRate, 0, leaseRate
             end
@@ -106,6 +113,23 @@ AnimalScreen.onClickBuy = Utils.overwrittenFunction(
             local text = self.controller:getApplyLeaseConfirmationText(animalTypeIndex, animalIndex, self.numAnimals)
             local buttonText = g_i18n:getText("ll_leaseButton")
             YesNoDialog.show(self.onYesNoLease, self, text, g_i18n:getText("ui_attention"), buttonText, g_i18n:getText("button_back"))
+            return true
+        end
+        return superFunc(self)
+    end
+)
+
+-- Sell button click: Terminate lease animals instead of sell while animal custer is leased
+AnimalScreen.onClickSell = Utils.overwrittenFunction(
+    AnimalScreen.onClickSell,
+    function(self, superFunc)
+        local animalIndex = self.sourceList.selectedIndex
+        local item = self.controller:getTargetItems()[animalIndex]
+        if item ~= nil and item.cluster ~= nil and item.cluster.isLeased then
+            self.numAnimals = self.numAnimalsElement:getState()
+            local text = self.controller:getTerminateLeaseConfimationText(animalIndex, self.numAnimals)
+            local buttonText = self.controller:getTargetActionText()
+            YesNoDialog.show(self.onYesNoTarget, self, text, g_i18n:getText("ui_attention"), buttonText, g_i18n:getText("button_back"))
             return true
         end
         return superFunc(self)

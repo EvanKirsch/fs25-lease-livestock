@@ -18,6 +18,9 @@ function LL_LeaseLivestock:loadMap()
     if g_animalScreen ~= nil and g_animalScreen.buttonBuy ~= nil then
         g_animalScreen.buttonBuy.onClickCallback = AnimalScreen.onClickBuy
     end
+    if g_animalScreen ~= nil and g_animalScreen.buttonSell ~= nil then
+        g_animalScreen.buttonSell.onClickCallback = AnimalScreen.onClickSell
+    end
     g_animalScreen.buttonsPanel:invalidateLayout()
 end
 

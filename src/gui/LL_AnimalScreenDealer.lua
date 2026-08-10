@@ -41,12 +41,29 @@ function LL_AnimalScreenDealer:getApplyLeaseConfirmationText(animalTypeIndex, it
     )
 end
 
+function LL_AnimalScreenDealer:getTerminateLeaseConfimationText(itemIndex, numItems)
+    local item = self.targetItems[itemIndex]
+    local leaseRate = LL_LeaseLivestock:getAnimalLeaseRate(item:getSubTypeIndex())
+    local totalRate = leaseRate * numItems
+    local rateStr = g_i18n:formatMoney(leaseRate, 0, true, true)
+    local totalRateStr = g_i18n:formatMoney(totalRate, 0, true, true)
+    local animalType = item:getTitle() .. ", " .. item:getName()
+    return string.namedFormat(g_i18n:getText("ll_terminateLeaseConfirm"),
+        "numAnimals", numItems,
+        "animalType", animalType,
+        "totalRate",  totalRateStr,
+        "rate",       rateStr
+    )
+end
+
 -- Configure lease buttons on dealer screens
 
 AnimalScreenDealer.applyLease = LL_AnimalScreenDealer.applyLease
 AnimalScreenDealer.onAnimalLeased = LL_AnimalScreenDealer.onAnimalLeased
 AnimalScreenDealer.getApplyLeaseConfirmationText = LL_AnimalScreenDealer.getApplyLeaseConfirmationText
+AnimalScreenDealer.getTerminateLeaseConfimationText = LL_AnimalScreenDealer.getTerminateLeaseConfimationText
 
 AnimalScreenDealerFarm.applyLease = LL_AnimalScreenDealer.applyLease
 AnimalScreenDealerFarm.onAnimalLeased = LL_AnimalScreenDealer.onAnimalLeased
 AnimalScreenDealerFarm.getApplyLeaseConfirmationText = LL_AnimalScreenDealer.getApplyLeaseConfirmationText
+AnimalScreenDealerFarm.getTerminateLeaseConfimationText = LL_AnimalScreenDealer.getTerminateLeaseConfimationText

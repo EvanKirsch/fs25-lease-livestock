@@ -8,6 +8,7 @@
         <text name="ll_terminatedLeaseRefund" text="Leasing-Rückerstattungen"/>
         <text name="ll_leasePrices" text="Leasingpreise pro Periode"/>
         <text name="ll_leaseConfirm" text="Möchten Sie %{numAnimals}d (%{animalType}s) für %{rate}s /Monat pro Tier leasen? (%{totalRate}s gesamt)"/>
+        <text name="ll_terminateLeaseConfirm" text="Möchten Sie das Leasing für %{numAnimals}d (%{animalType}s) beenden? Sie erhalten die Leasinggebühr der aktuellen Periode in Höhe von %{rate}s pro Tier zurückerstattet (%{totalRate}s gesamt)."/>
         <text name="input_LL_BUY_LEASE_MODE" text="Kauf-/Leasing-Modus wechseln"/>
         <text name="ll_leaseSuccess" text="Tiere erfolgreich geleast!"/>
         <text name="ll_leasingAnimals" text="Tiere werden geleast..."/>
