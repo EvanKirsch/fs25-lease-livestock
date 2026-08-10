@@ -118,8 +118,15 @@ AnimalScreen.updateInfoBox = Utils.overwrittenFunction(
     function(self, superFunc, ...)
         local result = superFunc(self, ...)
         if not self.isBuyMode and not g_gui.currentlyReloading then
+            -- in sell mode only tag as leased if from leased cluster
             local item = self.controller:getTargetItems()[self.sourceList.selectedIndex]
             if item ~= nil and item.cluster ~= nil and item.cluster.isLeased then
+                self.infoName:setText(self.infoName:getText() .. " " .. g_i18n:getText("ll_leased"))
+            end
+        elseif self.isBuyMode and self.isLeaseMode and not g_gui.currentlyReloading then
+            -- if buy mode and lease mode, add lease tag to all info boxes
+            local item = self.controller:getTargetItems()[self.sourceList.selectedIndex]
+            if item ~= nil then
                 self.infoName:setText(self.infoName:getText() .. " " .. g_i18n:getText("ll_leased"))
             end
         end
@@ -134,15 +141,19 @@ AnimalScreen.populateCellForItemInSection = Utils.overwrittenFunction(
     function(self, superFunc, list, section, index, cell)
         superFunc(self, list, section, index, cell)
         if list == self.sourceList and not self.isBuyMode then
+            -- In sell mode always display leased tag for livestock
             local item = self.controller:getTargetItems()[index]
             if item ~= nil and item.cluster ~= nil and item.cluster.isLeased then
                 local nameElement = cell:getAttribute("name")
                 nameElement:setText(nameElement:getText() .. " " .. g_i18n:getText("ll_leased"))
             end
         elseif list == self.sourceList and self.isBuyMode and self.isLeaseMode then
+            -- In buy mode, if in lease mode display leased tag for livestock and override the price
             local animalTypeIndex = self.sourceSelectorStateToAnimalType[self.sourceSelector:getState()]
             local item = self.controller:getSourceItems(animalTypeIndex, self.isBuyMode)[index]
             if item ~= nil then
+                local nameElement = cell:getAttribute("name")
+                nameElement:setText(nameElement:getText() .. " " .. g_i18n:getText("ll_leased"))
                 local leaseRate = LL_LeaseLivestock:getAnimalLeaseRate(item:getSubTypeIndex())
                 cell:getAttribute("price"):setValue(leaseRate)
             end
