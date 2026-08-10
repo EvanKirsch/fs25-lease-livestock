@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="111" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
   <author>Evan Kirsch</author>
-  <version>0.0.0.2</version>
+  <version>1.0.0.0</version>
   <title>
     <en>Lease Livestock</en>
     <de>Vieh Leasen</de>
   </title>
   <description>
     <en><![CDATA[
+Just starting your herd and short on cash? Skip the huge upfront cost - lease your livestock instead! Pick your animals at the dealer, flip on Lease Mode, and they're in your barn for a small recurring fee instead of the full buy price. Changed your mind or your finances turned around? Terminate the lease any time and get the current period's fee refunded, no questions asked.
+
+Leased animals are clearly tagged everywhere you'd look for them - the animal screen, the info box, and the in-game Animals overview - and every lease payment shows up on your finance sheet under "Livestock Leasing" so you always know what your herd is costing you.
+
 GitHub: https://github.com/EvanKirsch/FS25_LeaseLivestock
 ]]></en>
     <de><![CDATA[
+Steht Ihre Farm noch am Anfang und das Budget ist knapp? Sparen Sie sich die hohen Anschaffungskosten und leasen Sie Ihr Vieh stattdessen! Wählen Sie beim Händler Ihre Tiere aus, aktivieren Sie den Leasing-Modus, und schon stehen sie für eine kleine wiederkehrende Gebühr statt des vollen Kaufpreises in Ihrem Stall. Haben Sie es sich anders überlegt oder geht's Ihnen finanziell wieder besser? Beenden Sie das Leasing jederzeit und erhalten Sie die Gebühr der aktuellen Periode ohne Wenn und Aber zurück.
+
+Geleaste Tiere sind überall klar gekennzeichnet, wo Sie danach suchen würden - auf dem Tierbildschirm, in der Infobox und in der Tierübersicht des Spielmenüs - und jede Leasingzahlung erscheint in Ihrer Finanzübersicht unter "Tier-Leasing", damit Sie immer wissen, was Ihre Herde kostet.
+
 Git-Hub: https://github.com/EvanKirsch/FS25_LeaseLivestock
 ]]></de>
   </description>
