@@ -67,13 +67,13 @@ local function refreshLeaseLabels(self)
     end
 end
 
--- Mirror the Buy button's visibility on the Lease button.
+-- Add buy/lease mode change selection state
 AnimalScreen.setSelectionState = Utils.overwrittenFunction(
     AnimalScreen.setSelectionState,
     function(self, superFunc, state, ...)
         local result = superFunc(self, state, ...)
         if self.buttonBuyLeaseMode ~= nil then
-            self.buttonBuyLeaseMode:setVisible(self.selectionState == AnimalScreen.SELECTION_AMOUNT and self.isBuyMode)
+            self.buttonBuyLeaseMode:setVisible(self.isBuyMode)
             self.buttonsPanel:invalidateLayout()
         end
         refreshLeaseLabels(self)
