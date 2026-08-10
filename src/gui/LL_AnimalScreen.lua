@@ -127,7 +127,8 @@ AnimalScreen.updateInfoBox = Utils.overwrittenFunction(
     end
 )
 
--- Append the leased label to the name on each animal card in the sell list.
+-- Append the leased label to the name on each animal card in the sell list, and show the lease
+-- rate instead of the buy price on each card in the buy list while lease mode is toggled on.
 AnimalScreen.populateCellForItemInSection = Utils.overwrittenFunction(
     AnimalScreen.populateCellForItemInSection,
     function(self, superFunc, list, section, index, cell)
@@ -137,6 +138,13 @@ AnimalScreen.populateCellForItemInSection = Utils.overwrittenFunction(
             if item ~= nil and item.cluster ~= nil and item.cluster.isLeased then
                 local nameElement = cell:getAttribute("name")
                 nameElement:setText(nameElement:getText() .. " " .. g_i18n:getText("ll_leased"))
+            end
+        elseif list == self.sourceList and self.isBuyMode and self.isLeaseMode then
+            local animalTypeIndex = self.sourceSelectorStateToAnimalType[self.sourceSelector:getState()]
+            local item = self.controller:getSourceItems(animalTypeIndex, self.isBuyMode)[index]
+            if item ~= nil then
+                local leaseRate = LL_LeaseLivestock:getAnimalLeaseRate(item:getSubTypeIndex())
+                cell:getAttribute("price"):setValue(leaseRate)
             end
         end
     end
@@ -162,6 +170,7 @@ function AnimalScreen:onClickToggleLeaseMode()
     self.isLeaseMode = not self.isLeaseMode
     refreshLeaseLabels(self)
     self:updatePrice()
+    self.sourceList:reloadData(true)
     return true
 end
 
