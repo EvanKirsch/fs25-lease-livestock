@@ -47,7 +47,6 @@ local function refreshLeaseLabels(self)
             buyButton:setText(self.isLeaseMode and g_i18n:getText("ll_leaseButton") or self.controller:getSourceActionText())
         end
         if self.buttonBuyLeaseMode ~= nil then
-            self.buttonBuyLeaseMode:setPressed(self.isLeaseMode == true)
             self.buttonBuyLeaseMode:setText(self.isLeaseMode and g_i18n:getText("ll_buyMode") or g_i18n:getText("ll_leaseMode"))
         end
         if pricesLabel ~= nil then
