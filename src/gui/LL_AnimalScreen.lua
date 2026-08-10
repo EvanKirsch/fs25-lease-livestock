@@ -142,6 +142,17 @@ AnimalScreen.populateCellForItemInSection = Utils.overwrittenFunction(
     end
 )
 
+-- Registers the LL_LEASE hotkey alongside the base game's action events; setInputAction() on
+-- the button only sets its key glyph, it does not by itself make the key do anything.
+AnimalScreen.registerActionEvents = Utils.overwrittenFunction(
+    AnimalScreen.registerActionEvents,
+    function(self, superFunc, ...)
+        local result = superFunc(self, ...)
+        g_inputBinding:registerActionEvent(InputAction.LL_LEASE, self, self.onClickToggleLeaseMode, false, true, false, true)
+        return result
+    end
+)
+
 -- Lease button click: toggle the screen mode between buying and leasing.
 function AnimalScreen:onClickToggleLeaseMode()
     if not self.isLeaseMode and self.controller.getApplyLeaseConfirmationText == nil then
