@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<modDesc descVersion="109" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
+<modDesc descVersion="111" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
   <author>Evan Kirsch</author>
   <version>0.0.0.2</version>
   <title>
@@ -17,10 +17,10 @@ Git-Hub: https://github.com/EvanKirsch/FS25_LeaseLivestock
   <iconFilename>icon_leaseLivestock.dds</iconFilename>
   <multiplayer supported="true"/>
   <actions>
-    <action name="LL_LEASE" axisType="HALF" category="MENU" />
+    <action name="LL_BUY_LEASE_MODE" axisType="HALF" category="MENU" />
   </actions>
   <inputBinding>
-    <actionBinding action="LL_LEASE">
+    <actionBinding action="LL_BUY_LEASE_MODE">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_lshift" axisComponent="+" neutralInput="0" index="1" />
     </actionBinding>
   </inputBinding>

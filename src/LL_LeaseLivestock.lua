@@ -8,14 +8,20 @@ LL_LeaseLivestock.dir = g_currentModDirectory
 function LL_LeaseLivestock:loadMap()
     g_messageCenter:subscribe(MessageType.PERIOD_CHANGED, self.onPeriodChanged, self)
     if g_animalScreen ~= nil and g_animalScreen.buttonBuy ~= nil then
-        g_animalScreen.buttonLease = g_animalScreen.buttonBuy:clone(g_animalScreen.buttonsPanel)
-        g_animalScreen.buttonLease:setText(g_i18n:getText("ll_leaseButton"))
-        g_animalScreen.buttonLease:setInputAction("LL_LEASE")
-        g_animalScreen.buttonLease:setVisible(false)
-        g_animalScreen.buttonLease.onClickCallback = AnimalScreen.onClickLease
-        g_animalScreen.buttonLease.onClickCallbackTarget = g_animalScreen
-        g_animalScreen.buttonsPanel:invalidateLayout()
+        g_animalScreen.buttonBuyLeaseMode = g_animalScreen.buttonSelect:clone(g_animalScreen.buttonsPanel)
+        g_animalScreen.buttonBuyLeaseMode:setText(g_i18n:getText("ll_leaseButton"))
+        g_animalScreen.buttonBuyLeaseMode:setInputAction("LL_BUY_LEASE_MODE")
+        g_animalScreen.buttonBuyLeaseMode:setVisible(false)
+        g_animalScreen.buttonBuyLeaseMode.onClickCallback = AnimalScreen.onClickToggleLeaseMode
+        g_animalScreen.buttonBuyLeaseMode.onClickCallbackTarget = g_animalScreen
     end
+    if g_animalScreen ~= nil and g_animalScreen.buttonBuy ~= nil then
+        g_animalScreen.buttonBuy.onClickCallback = AnimalScreen.onClickBuy
+    end
+    if g_animalScreen ~= nil and g_animalScreen.buttonSell ~= nil then
+        g_animalScreen.buttonSell.onClickCallback = AnimalScreen.onClickSell
+    end
+    g_animalScreen.buttonsPanel:invalidateLayout()
 end
 
 function LL_LeaseLivestock:onPeriodChanged()

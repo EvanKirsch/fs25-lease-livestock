@@ -22,6 +22,17 @@ AnimalCluster.getSellPrice = Utils.overwrittenFunction(AnimalCluster.getSellPric
     end
 )
 
+-- No transport fee when returning leased animals; the sell flow (AnimalScreenDealer(Farm):applyTarget)
+-- deducts this from the sell price, so an unpatched fee silently eats into the lease refund.
+AnimalCluster.getTranportationFee = Utils.overwrittenFunction(AnimalCluster.getTranportationFee,
+    function(self, superFunc, numItems)
+        if self.isLeased then
+            return 0
+        end
+        return superFunc(self, numItems)
+    end
+)
+
 -- Prevent merges between leased and non-leased clusters.
 AnimalCluster.merge = Utils.overwrittenFunction(AnimalCluster.merge,
     function(self, superFunc, otherCluster)
