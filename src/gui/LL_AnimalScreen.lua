@@ -185,13 +185,13 @@ AnimalScreen.populateCellForItemInSection = Utils.overwrittenFunction(
     end
 )
 
--- Registers the LL_LEASE hotkey alongside the base game's action events; setInputAction() on
--- the button only sets its key glyph, it does not by itself make the key do anything.
+-- Registers the LL_BUY_LEASE_MODE hotkey alongside the base game's action events; setInputAction()
+-- on the button only sets its key glyph, it does not by itself make the key do anything.
 AnimalScreen.registerActionEvents = Utils.overwrittenFunction(
     AnimalScreen.registerActionEvents,
     function(self, superFunc, ...)
         local result = superFunc(self, ...)
-        g_inputBinding:registerActionEvent(InputAction.LL_LEASE, self, self.onClickToggleLeaseMode, false, true, false, true)
+        g_inputBinding:registerActionEvent(InputAction.LL_BUY_LEASE_MODE, self, self.onClickToggleLeaseMode, false, true, false, true)
         return result
     end
 )

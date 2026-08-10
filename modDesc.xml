@@ -17,10 +17,10 @@ Git-Hub: https://github.com/EvanKirsch/FS25_LeaseLivestock
   <iconFilename>icon_leaseLivestock.dds</iconFilename>
   <multiplayer supported="true"/>
   <actions>
-    <action name="LL_LEASE" axisType="HALF" category="MENU" />
+    <action name="LL_BUY_LEASE_MODE" axisType="HALF" category="MENU" />
   </actions>
   <inputBinding>
-    <actionBinding action="LL_LEASE">
+    <actionBinding action="LL_BUY_LEASE_MODE">
       <binding device="KB_MOUSE_DEFAULT" input="KEY_lshift" axisComponent="+" neutralInput="0" index="1" />
     </actionBinding>
   </inputBinding>
